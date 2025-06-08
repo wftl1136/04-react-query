@@ -11,6 +11,10 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import MovieModal from "../MovieModal/MovieModal";
 import { Toaster } from "react-hot-toast";
 import styles from "./App.module.css";
+import { keepPreviousData } from "@tanstack/react-query";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+
 
 function App() {
   const [query, setQuery] = useState("");
@@ -22,12 +26,18 @@ function App() {
     isLoading,
     isError,
     isSuccess,
-  } = useQuery<FetchMoviesResponse, Error>({
-    queryKey: ["movies", query, page],
-    queryFn: () => fetchMovies({ query, page }),
-    enabled: !!query,
-    staleTime: 1000 * 60 * 5, // заміна keepPreviousData
-  });
+  }  =useQuery<FetchMoviesResponse, Error>({
+  queryKey: ["movies", query, page],
+  queryFn: () => fetchMovies({ query, page }),
+  enabled: !!query,
+  placeholderData: keepPreviousData,
+});
+
+useEffect(() => {
+  if (isSuccess && data.results.length === 0) {
+    toast("No movies found. Try a different search.");
+  }
+}, [isSuccess, data]);
 
   const handleSearch = (newQuery: string) => {
     setQuery(newQuery);
