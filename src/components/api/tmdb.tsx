@@ -10,7 +10,7 @@ export async function fetchMovies({
 }: FetchMoviesParams): Promise<FetchMoviesResponse> {
   const response = await axios.get<FetchMoviesResponse>(
     "https://api.themoviedb.org/3/search/movie",
-    {
+    { 
       params: {
         query,
         page,
