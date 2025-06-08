@@ -9,13 +9,7 @@ const options = {
   },
 };
 
-export interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  poster_path: string;
-  release_date: string;
-}
+import type { Movie } from "../types/movie";
 
 export interface FetchMoviesResponse {
   page: number;
