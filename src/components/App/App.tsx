@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ReactPaginate from "react-paginate";
 import { fetchMovies } from "../../services/movieService";
-import type { FetchMoviesResponse } from "../../services/movieService";
-import type { Movie } from "../../types/movie"; 
+
 import SearchBar from "../SearchBar/SearchBar";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import Loader from "../Loader/Loader";
@@ -14,7 +13,7 @@ import styles from "./App.module.css";
 import { keepPreviousData } from "@tanstack/react-query";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-
+import type { FetchMoviesResponse, Movie } from "../../types/movie";
 
 function App() {
   const [query, setQuery] = useState("");
