@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ReactPaginate from "react-paginate";
-import { fetchMovies } from "./services/movieService";
-import SearchBar from "./components/SearchBar/SearchBar";
-import MovieGrid from "./components/MovieGrid/MovieGrid";
-import Loader from "./components/Loader/Loader";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import styles from "./App.module.css";
+import { fetchMovies } from '../../services/movieService';
+import SearchBar from '../SearchBar/SearchBar';
+import MovieGrid from '../MovieGrid/MovieGrid';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+
 
 function App() {
   const [query, setQuery] = useState("");
@@ -36,7 +36,9 @@ function App() {
           pageCount={data.total_pages}
           pageRangeDisplayed={5}
           marginPagesDisplayed={1}
-          onPageChange={({ selected }) => setPage(selected + 1)}
+          onPageChange={(selectedItem: { selected: number }) =>
+          setPage(selectedItem.selected + 1)
+          }
           forcePage={page - 1}
           containerClassName={styles.pagination}
           activeClassName={styles.active}
