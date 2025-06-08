@@ -4,7 +4,6 @@ import type {
   FetchMoviesResponse,
 } from "../types/movie";
 
-
 export async function fetchMovies({
   query,
   page = 1,
@@ -18,6 +17,7 @@ export async function fetchMovies({
       },
       headers: {
         Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+        Accept: "application/json",
       },
     }
   );
