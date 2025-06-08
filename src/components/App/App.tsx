@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ReactPaginate from "react-paginate";
-import { fetchMovies, Movie } from "../../services/movieService";
+import { fetchMovies } from "../../services/movieService";
+import type { Movie, FetchMoviesResponse } from "../../services/movieService";
 import SearchBar from "../SearchBar/SearchBar";
 import MovieGrid from "../MovieGrid/MovieGrid";
 import Loader from "../Loader/Loader";
@@ -20,11 +21,11 @@ function App() {
     isLoading,
     isError,
     isSuccess,
-  } = useQuery({
+  } = useQuery<FetchMoviesResponse, Error>({
     queryKey: ["movies", query, page],
     queryFn: () => fetchMovies({ query, page }),
     enabled: !!query,
-    keepPreviousData: true,
+    staleTime: 1000 * 60 * 5, // заміна keepPreviousData
   });
 
   const handleSearch = (newQuery: string) => {
@@ -39,7 +40,7 @@ function App() {
       <SearchBar onSubmit={handleSearch} />
 
       {isLoading && <Loader />}
-      {isError && <ErrorMessage />}
+      {isError && <ErrorMessage message="Failed to load movies." />}
 
       {isSuccess && data.results.length === 0 && (
         <p>No movies found. Try a different search.</p>
