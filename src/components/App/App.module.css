@@ -1,0 +1,39 @@
+.app {
+  padding: 0 16px;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 1rem;
+  padding-bottom: 16px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+.paginationButton {
+  padding: 0.5rem 1rem;
+  background-color: #0a66c2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.paginationButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  font-size: 1rem;
+  color: #333;
+}
+.pageNumber {
+  padding: 0.3rem 0.6rem;
+  margin: 0 0.2rem;
+  background: none;
+  border: 1px solid #0a66c2;
+  border-radius: 4px;
+  cursor: pointer;
+}
